@@ -1,0 +1,28 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import './BlogList.css';
+import MarkDown from 'markdown-to-jsx';
+
+function BlogList(){
+  const file_name = 'post1.md';
+  const [post, setPost] = useState('');
+
+  useEffect(() => {
+    import(`../posts/${file_name}`)
+      .then(res => {
+        fetch(res.default)
+        .then(res => res.text())
+        .then(res => setPost(res));
+      })
+      .catch(err => console.log(err))
+    });
+    return(
+      <div>
+        <MarkDown>
+          {post}
+        </MarkDown>
+      </div>
+    )
+  }
+
+export default BlogList;
