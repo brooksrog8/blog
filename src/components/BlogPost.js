@@ -23,7 +23,7 @@ const BlogPost = () => {
             <Link to="/" className="back-link">Back to Home</Link> {/* Add a link to go back to the home page */}
       <MarkDown>{post}</MarkDown>
       <footer>
-        <p>&copy; 2024 Systemfailu.re. All Rights Reserved.</p>
+        <p>&copy; 2024 Sysflow.live. All Rights Reserved.</p>
       </footer>
     </div>
     

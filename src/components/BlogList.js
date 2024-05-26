@@ -12,8 +12,8 @@ function BlogList() {
     // Fetch your list of posts here, maybe from an API or a local file
     // For simplicity, I'm hardcoding it here
     const fetchedPosts = ([
-      { id: 1, title: 'Title of Blog Post 1', fileName: 'post1.md', category: 'Reverse Engineering' },
-      { id: 2, title: 'Title of Blog Post 2', fileName: 'post2.md', category: 'Malware analysis' },
+      { id: 2, title: 'Distribution service DRM analysis ', fileName: 'post2.md', category: 'Reverse Engineering' },
+      { id: 1, title: 'AAA Company Game Reversing', fileName: 'post1.md', category: 'Reverse Engineering' },
     ]);
     setPosts(fetchedPosts);
     // Extract categories from posts
@@ -32,7 +32,7 @@ function BlogList() {
   return (
     <div className="blog-list-container">
       <h2 className="blog-list-title">
-        <a href="/" className="home-link">List of Blog Posts</a>
+        <a href="/" className="home-link">Sysflow.live</a>
       </h2>
       <h3 className="blog-list-subtitle">A Blog About Reverse Engineering, Malware analysis, and more</h3>
       <hr className="subtitle-line" />
@@ -67,7 +67,7 @@ function BlogList() {
         </div>
       </div>
       <footer>
-        <p>&copy; 2024 Systemfailu.re. All Rights Reserved.</p>
+        <p>&copy; 2024 Sysflow.live. All Rights Reserved.</p>
       </footer>
     </div>
   );
