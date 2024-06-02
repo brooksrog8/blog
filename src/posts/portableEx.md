@@ -29,10 +29,10 @@ A VA for the PE file here would be 0x00400108 in memory, 0x00400200 for .text, a
 
 ![alt text](image-18.png)
 
-Here is an example of a PE file.
+Here is what a PE file looks like in a hex editor.
 
 It starts with the "magic" MZ or 0x5A4D, these are the initials of the PE designer Mark Zbikowski.
-This is important to know because every exe will begin with this sequence, also  the E1fa at 0x40, which is a DWORD offset to a new PE header that includes PE\0\0.
+This is important to remember because every exe will begin with this sequence, also  the E1fa at 0x40, which is a DWORD offset to a new PE header that includes PE\0\0.
 ![alt text](image-16.png)
 
 
@@ -130,4 +130,6 @@ And same for the `export address table`
 In a typical reverse engineering process, the first thing I do is check the `imports/exports` of the app to see if there's anything notable. It's a good idea to do this because it helps reverse engineers understand the functionality and behavior of the program, provide insights into a programs external depencdencies, and it's interaction with external libraries. 
 
 
-While this overview scratches the surface, the intracacies of PE file structure can go deeper from deciphering encrypted payloads to unraveling complex anti-analysis measures, this is all I wanted to write about today. We will uncover more PE concepts and computer security topics later.
+While this overview scratches the surface, the intracacies of PE file structure can go deeper from deciphering encrypted payloads to unraveling complex anti-analysis measures, this is all I wanted to write about today. 
+
+We will uncover more PE concepts and other computer security topics later.
