@@ -39,8 +39,11 @@ This is important to remember because every exe will begin with this sequence, a
 
 So for example this is how a .text section would look in IDA, the virtual address for sub_442214 here would be 00042214, and 00442215 would be the virtual address for the `mov edp, esp` line.
 
-And the Relative virtual address (RVA) = VA - Base address 
-So 00442214 - 00400000 = 42214. 
+And for the Relative virtual address
+
+ (RVA) = VA - Base address
+
+So for sub_442214: 00442214 - 00400000 = 42214. 
 
 A VA acts as a pointer within a specific memory space that doesn't direct association with physical memory addresses. Essentially a way for computers to keep track of where things are without worrying about the actual physical memory layout, this abstraction allows for efficient memory management for the OS performance and security. 
 
@@ -61,9 +64,9 @@ ns resou
 
 The IAT is a lookup table used when the application is calling functions in a different module.
 
-So when we reference `MessageBox` symbolically below, when compiling and linking they recognize that `MessageBox` is provided by the `USER32.dll` module of the Windows API. Then, during runtime, it dynamically links them together. 
+So when we reference `MessageBox` symbolically in the C code below below, when compiling and linking they recognize that `MessageBox` is provided by the `USER32.dll` module of the Windows API. Then, during runtime, it dynamically links them together. 
 <details>
-  <summary>Show C code</summary>
+  <summary>Show C code example</summary>
   <pre><code class="language-c">
 
 
@@ -80,7 +83,7 @@ int main() {
 
 </details>
 <details>
-  <summary>Show C++ code</summary>
+  <summary>Show C++ code example</summary>
   <pre><code class="language-cpp">
   
 #include <iostream>
@@ -104,7 +107,7 @@ Now looking at our IAT in PE-Bear:
 ![alt text](image-20.png)
 
 
-As you can see the result is an entry for `user32.dll` is added to the IAT of the exe. 
+As you can see the result is an entry for `user32.dll` being added to the IAT of the exe. 
 
 Now in IDA searching for `MessageBox` in our imports:
 
@@ -115,9 +118,40 @@ Now in IDA searching for `MessageBox` in our imports:
 ![alt text](image-22.png)
 
 
-Then we can find our function here in the `.data` section, where IAT is typically located.
+Then we can find our function here in the `.data` section, where the IAT is typically located.
 
 And same for the `export address table`
+
+
+<details>
+  <summary>Show C code example of a dll export</summary>
+  <pre><code class="language-c">
+
+
+#include <stdio.h>
+#include <windows.h>
+
+// This function will be exported and called by the main executable
+__declspec(dllexport) void print_two() {
+    printf("Two is my number\n"); 
+}
+
+// function to print the number 2
+__declspec(dllexport) void print_number_two() {
+    printf("2\n"); 
+}
+
+// Entry point for the DLL, called by the system when the DLL is loaded or unloaded
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
+    return TRUE;
+}
+
+  </code></pre>
+
+
+
+</details>
+
 
 
 ![alt text](image-24.png)
@@ -127,7 +161,7 @@ And same for the `export address table`
 
 
 ### Why the IAT/EAT is important for reverse engineering
-In a typical reverse engineering process, the first thing I do is check the `imports/exports` of the app to see if there's anything notable. It's a good idea to do this because it helps reverse engineers understand the functionality and behavior of the program, provide insights into a programs external depencdencies, and it's interaction with external libraries. 
+In a typical reverse engineering process, it's a good practice to first check the `imports/exports` of the app to see if there's anything notable. It's a good idea to do this because it helps reverse engineers understand the functionality and behavior of the program, provide insights into a programs external depencdencies, and it's interaction with external libraries. 
 
 
 While this overview scratches the surface, the intracacies of PE file structure can go deeper from deciphering encrypted payloads to unraveling complex anti-analysis measures, this is all I wanted to write about today. 
