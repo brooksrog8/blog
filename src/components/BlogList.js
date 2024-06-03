@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './BlogList.css';
-import MarkDown from 'markdown-to-jsx';
 
 function BlogList() {
   const [posts, setPosts] = useState([]);
@@ -12,7 +11,7 @@ function BlogList() {
     // Fetch your list of posts here, maybe from an API or a local file
     // For simplicity, I'm hardcoding it here
     const fetchedPosts = ([
-      { id: 2, title: 'Distribution service DRM analysis ', fileName: 'post2.md', category: 'Reverse Engineering' },
+      { id: 2, title: 'Overview of PE File Structure for Reverse Engineering', fileName: 'portableEx.md', category: 'Reverse Engineering' },
       { id: 1, title: 'AAA Company Game Reversing', fileName: 'post1.md', category: 'Reverse Engineering' },
     ]);
     setPosts(fetchedPosts);

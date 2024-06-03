@@ -61,6 +61,8 @@ footer p {
 }
 
 .back-link {
+    margin-bottom: 20px; /* Adjust this value to add space after the back-link */
+
     color: rgb(92, 180, 10); /* Change color to green */
     text-decoration: none; /* Remove underline */
 }
@@ -74,3 +76,53 @@ footer p {
     text-decoration: none; /* Remove underline */
 }
 
+.markdown-content {
+    max-width: 800px; /* Limit the width of the content */
+    margin: 0 auto; /* Center the content horizontally */
+    padding: 20px; /* Add padding around the content */
+    font-family: Arial; /* Use a sans-serif font */
+    line-height: 1.6; /* Improve line spacing */
+  }
+  
+  .markdown-content p {
+    font-size: 1.4em; /* Adjust font size of paragraphs */
+    margin-bottom: 20px; /* Add space below paragraphs */
+  }
+  
+  .markdown-content h1 {
+    font-size: 2.8em; /* Increase font size for h1 */
+    margin-top: 40px; /* Add space above h1 */
+  }
+  
+  .markdown-content h2 {
+    font-size: 2.0em; /* Increase font size for h2 */
+    margin-top: 30px; /* Add space above h2 */
+  }
+  
+  .markdown-content img {
+    display: block; /* Ensure images are displayed as block elements */
+    max-width: 100%; /* Make sure images don't overflow their containers */
+    margin: 0 auto; /* Center-align images horizontally */
+    margin-bottom: 20px; /* Add space below images */
+  }
+  
+  .markdown-content summary {
+    cursor: pointer; /* Show pointer cursor for summary */
+  }
+  
+  .markdown-content pre {
+    background-color: #f4f4f4; /* Set background color for code blocks */
+    padding: 10px; /* Add padding around code blocks */
+    overflow-x: auto; /* Allow horizontal scrolling for long code lines */
+    border-radius: 5px; /* Add rounded corners to code blocks */
+  }
+  
+  .markdown-content a {
+    color: #007bff; /* Set link color */
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+  .markdown-content a:hover {
+    text-decoration: underline; /* Add underline on hover */
+  }
+  

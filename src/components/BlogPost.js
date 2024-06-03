@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'; // Import Link
 import './BlogPost.css';
 import MarkDown from 'markdown-to-jsx';
 
+
 const BlogPost = () => {
   const { id } = useParams();
   const [post, setPost] = useState('');
@@ -20,13 +21,15 @@ const BlogPost = () => {
 
   return (
     <div>
-            <Link to="/" className="back-link">Back to Home</Link> {/* Add a link to go back to the home page */}
-      <MarkDown>{post}</MarkDown>
+      <Link to="/" className="back-link">Back to Home</Link> {/* Add a link to go back to the home page */}
+      <div className="markdown-content">
+        <MarkDown>{post}</MarkDown>
+
+      </div>
       <footer>
         <p>&copy; 2024 Sysflow.live. All Rights Reserved.</p>
       </footer>
     </div>
-    
   );
 };
 
