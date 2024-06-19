@@ -1,6 +1,3 @@
-
-
-
 # Overview of PE File Structure for Reverse Engineering
 
 
