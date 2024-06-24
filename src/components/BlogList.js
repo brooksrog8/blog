@@ -12,7 +12,7 @@ function BlogList() {
     const fetchedPosts = ([
       { id: 3, title: 'Opera Data Collection Analysis Part One: Broswer_assistant', fileName: 'post3.md', category: 'Reverse Engineering'},
       { id: 2, title: 'Overview of PE File Structure for Reverse Engineering', fileName: 'post2.md', category: 'Reverse Engineering Education' },
-      { id: 1, title: 'AAA Company Game Reversing', fileName: 'post1.md', category: 'Reverse Engineering' }
+      { id: 1, title: 'AC2 Game Reversing', fileName: 'post1.md', category: 'Reverse Engineering' }
     ]);
     setPosts(fetchedPosts);
     // Extract categories from posts
@@ -43,7 +43,7 @@ function BlogList() {
     <Link to={`/post/${post.id}`} className="blue-post-link">{post.title}</Link>
 
     </h3>
-    {/* Add a horizontal rule after each blog post */}
+
     <hr className="blog-post-divider" />
   </div>
 ))}

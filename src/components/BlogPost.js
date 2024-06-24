@@ -21,7 +21,7 @@ const BlogPost = () => {
 
   return (
     <div>
-      <Link to="/" className="back-link">Back to Home</Link> {/* Add a link to go back to the home page */}
+      <Link to="/" className="back-link">Back to Home</Link> 
       <div className="markdown-content">
         <MarkDown>{post}</MarkDown>
 

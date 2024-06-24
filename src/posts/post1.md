@@ -1,10 +1,10 @@
 
-# Game Reversing Final
+# AC2 Game Reversing
 
 ## Overview
 In this project, I reverse engineered Assassins Creed 2 to get unlimited currency and health using Reclass, IDA, and Cheatengine. I made this to be a general guideline for how these tools can be used to reverse engineering games.
  
- I do not recommend anyone to implement these techniques and this is strictly for educational purposes.
+I do not recommend anyone to implement these techniques and this is strictly for educational purposes.
 ## Technologies/Tools Used
 Reclass
 
@@ -18,7 +18,6 @@ x32dbg
 Before diving into the specifics of reverse engineering in games, it's important to understand that usually games will be packed. So first you might have to understand and unpack the game's protection mechanism. Using x32dbg can be a good tool for analyzing how these are used.
 
 It's crucial to remember that bypassing protective measures is illegal and some games include terms of service specifying that. Therefore, I will not provide any instructions on how to bypass these protections. This project will focus on the legal and ethical aspects of reverse engineering the games mechanics.
-
 
 ## Currency
 For games, cheatengine can be a very underrated tool. To use cheatengine effectively, you need to identify a few things first.
@@ -37,6 +36,7 @@ After getting to the result, you can find what accesses that address by right cl
 ![alt text](<unnamed (1).png>)
 
 For currency I looked at the instructions being used at each address and used some common sense of what would be used to change the currency. Here we can see at the bottom, it is comparing esi to edi + 34, then a condition checking if the value is still equal to another, otherwise it moves a value to another location.
+
 ```
 Instructions:
 - cmp: Compares the contents of general-purpose register (GPR) RA with the contents of GPR RB as signed integers and sets one of the bits in Condition Register Field BF
@@ -46,27 +46,32 @@ Instructions:
 
  I thought that seemed logical for a way to check for the value of currency being changed so I checked the address where this was being implemented in IDA
 
-![alt text](image-68.png)
+![image-68](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-68.png
+)
 
 Following the flow of the code we eventualy get here:
 
-![alt text](image-69.png)
+![image-69](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-69.png
+)
 
 Where it pushes an offset labeled `aSetPlayerFunds`
 
 Stepping in .rdata we can see the value tied to our player funds:
 
-![alt text](image-70.png)
+![image-70](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-70.png
+)
 
 ## Player Health
 
 For player health it is a bit different. In my case, the health we are trying to find the value of is an unknown initial value. So we scan for an unknown initial value in cheatengine. There will likely be multiple results, for each address, I found the base address of the class and opened it in Reclass.
 
-![alt text](image-71.png)
+![image-71](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/pics/image-71.png
+)
 
-Here is the base address circled in blue
+Here is the base address circled in blue, you can also find it by double clicking on address result since we want the value of `esi`
 
-![alt text](image-72.png)
+![image-72](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-72.png
+)
 
  Then I discovered that at index 4 (5th entry) of every VTable, which is the first pointer in the class, there is a pointer to the NAME of the class.
 
@@ -105,9 +110,3 @@ https://www.youtube.com/watch?v=37kk4Kf21S0
 ### Conclusion
 
 In today's online games, there will be additional things we have to consider with anti-cheat engines being tied to games. However not all games have anti-cheat's and some do not always work. But tread with caution as in some cases cheating in video games can be illegal in some circumstances. Also there is a chance of being banned from playing the game. I do not recommend anyone to implement these techniques and this is strictly for educational purposes.
-
-
-
-test
-
-
