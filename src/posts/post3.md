@@ -164,7 +164,6 @@ Here `geoAfterBase` initializes v4 to -1 and then passes its address to `geobase
 
 ![image37fixpost3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image37fixpost3.png
 )
-![alt text](image.png)
 
 And then here we are back at the first reference from .rdata
 
