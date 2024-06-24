@@ -80,7 +80,7 @@ footer p {
   max-width: 800px; /* Limit the width of the content */
   margin: 0 auto; /* Center the content horizontally */
   padding: 20px; /* Add padding around the content */
-  font-family: Arial, sans-serif; /* Use a sans-serif font */
+  font-family: Arial;
   line-height: 1.6; /* Improve line spacing */
 }
 

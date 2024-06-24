@@ -137,12 +137,15 @@ Some strings are copied at locations in memory after `a1` then returns `a1` whic
 ![image-46post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-46post3.png
 )
 
-`v36` is then moved into `v14`, and `v45` then called in a function i've named timeStamping passing the value of the data `v45` as an argument:
+`v36` is then moved into `v14`, and `v45` then called in a function i've named timeStamping passing the value of the data `v45` as an argument, so now our geo data is in `v45` when this is called:
 
 ![image-53post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-53post3.png
 )
 
 Stepping inside this is what we see:
+
+![image-54post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-54post3.png
+)
 
 There are two functions that we will be looking at in here:
 
@@ -150,9 +153,6 @@ There are two functions that we will be looking at in here:
 - `creationAndRunTimeStamp`
 
 First inside `operaLastSeen`
-
-![image-54post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-54post3.png
-)
 
 Here we can see some interesting functions and some strings telling us what is going on. We see that it is timestamping every first run of the browser. Stepping inside the `operaLastseen` function at the top:
 
@@ -174,22 +174,23 @@ And thankfully there's some strings to help us see that this function is used fo
 
 So it gets our country using the windows api, our time using GetSystemTimeAsFileTime, and our last use which stamps our runtime, but never sends it across any network for them to keep. So it does have our aproximate location down to our timezone, but so far in this module, does not get our exact location. 
 
-# getaddrinfo
+## Getting IP address 
 
 ![image-38post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-38post3.png
 )
 
-Another method they possibly could have used was getting a users ip using the `getaddrinfo` Windows API and then querying an IP location service, but it was clear they needed to use it for resolving domain names and other common browser functions. Also we saw from running the program in Wireshark that it made no requests to an IP service to get our location. This means that either 
-- Opera has made an update to no longer get the users exact location via IP services and uses a new method
+Another method they possibly could have used was getting a users ip using the `getaddrinfo` Windows API and then querying an IP location service, but it was clear they needed to use it for resolving domain names and other common browser functions. 
 
+Also we saw from running the program in Wireshark that it made no requests to an IP service to get our location. This is interesting because that was the strategy of the OperaGX browser, this means either:
 - The broswer_assistant module is not involved with getting users location
 
+- Opera has made an update to no longer get the users exact location via IP services and uses a new method
 
 We know for a fact that it DOES get the users location seen from the screenshots at the start, so Opera not getting the users location isn't a possiblity.
 
 
 
-
+## /autoupdate.geo.opera
 Now as shown previously in wireshark, it makes a request to a domain that seemed rather suspicous and we can find it in the browser_assistant module.
 
 
@@ -202,6 +203,8 @@ However by looking at the cross references, this function clearly does nothing. 
 ![image-41](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-41.png
 )
 
+
+# Conclusion
 In conclusion, it seeems clear that the `browser_assistant` module does not operate as spyware according to our goal of finding where our coordinates our being tracked. Instead it performs normal IP address retrieving, and identifiying gerneral geo locations on the coiuntry level, and gathering statistics related to browser usage or connectivity. There is some statistic collection of what sites you visit, however I consider that rather normal in my opinion since the data collected is anonymized in this instance. 
 
 The functions we reviewed are common functionalities in network libraries and tools used by applications for ensuring network connection and basic network-related info. 
