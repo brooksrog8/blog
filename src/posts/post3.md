@@ -71,9 +71,9 @@ Now looking back at UserGeoID, so we can find our UserGeoID value in C:
 
 As you can see we get the value 244, and looking at the documentation for UserGeoID and going to the table of Geographical locations:
 
-![image-1post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-1post3.png
+![image-1post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-1Post3.png
 )
-![image-2post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-2post3.png
+![image-2post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-2Post3.png
 )
 
 

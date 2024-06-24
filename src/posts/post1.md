@@ -33,7 +33,8 @@ Then I will spend/gain money and scan again for the value being changed by x amo
 
 After getting to the result, you can find what accesses that address by right clicking which internally places a hardware breakpoint on that address.
 
-![alt text](<unnamed (1).png>)
+![unnamedpost1](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/unnamedpost1.png
+)
 
 For currency I looked at the instructions being used at each address and used some common sense of what would be used to change the currency. Here we can see at the bottom, it is comparing esi to edi + 34, then a condition checking if the value is still equal to another, otherwise it moves a value to another location.
 
