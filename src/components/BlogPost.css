@@ -101,7 +101,6 @@ footer p {
 
 .markdown-content img {
   display: block; /* Ensure images are displayed as block elements */
-  max-width: 100%; /* Make sure images don't overflow their containers */
   margin: 0 auto; /* Center-align images horizontally */
   margin-bottom: 20px; /* Add space below images */
 }

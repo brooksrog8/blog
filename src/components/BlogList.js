@@ -10,9 +10,9 @@ function BlogList() {
   useEffect(() => {
 
     const fetchedPosts = ([
-      { id: 3, title: 'Opera Data Collection Analysis Part One: Broswer_assistant', fileName: 'post3.md', category: 'Reverse Engineering'},
-      { id: 2, title: 'Overview of PE File Structure for Reverse Engineering', fileName: 'post2.md', category: 'Reverse Engineering Education' },
-      { id: 1, title: 'AC2 Game Reversing', fileName: 'post1.md', category: 'Reverse Engineering' }
+      { id: 3, title: "Reverse Engineering Analysis of Opera's Data Collection Part 1: Broswer_assistant", fileName: "post3.md", category: "Reverse Engineering"},
+      { id: 2, title: "Overview of PE File Structure for Reverse Engineering", fileName: "post2.md", category: "Reverse Engineering Education"},
+      { id: 1, title: "AC2 Game Reversing", fileName: "post1.md", category: "Reverse Engineering" }
     ]);
     setPosts(fetchedPosts);
     // Extract categories from posts

@@ -42,13 +42,13 @@ This is important to remember because every exe will begin with this sequence, a
 
 
 
-So for example this is how a .text section would look in IDA, the virtual address for sub_442214 here would be 00042214, and 00442215 would be the virtual address for the `mov edp, esp` line.
+So for example this is how a .text section would look in IDA, the virtual address for sub_442214 here would be 0x00042214, and 0x00442215 would be the virtual address for the `mov edp, esp` line.
 
 And for the Relative virtual address
 
  (RVA) = VA - Base address
 
-So for sub_442214: 00442214 - 00400000 = 42214. 
+So for sub_442214: 0x00442214 - 0x00400000 = 0x42214. 
 
 A VA acts as a pointer within a specific memory space that doesn't direct association with physical memory addresses. Essentially a way for computers to keep track of where things are without worrying about the actual physical memory layout, this abstraction allows for efficient memory management for the OS performance and security. 
 

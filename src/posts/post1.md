@@ -1,8 +1,8 @@
 
 # AC2 Game Reversing
 
-## Overview
-In this project, I reverse engineered Assassins Creed 2 to get unlimited currency and health using Reclass, IDA, and Cheatengine. I made this to be a general guideline for how these tools can be used to reverse engineering games.
+## Introduction
+In this project, I reverse engineered Assassins Creed 2 to get unlimited currency and health using Reclass, IDA, and Cheatengine. I made this to be a general educational guideline for how these tools can be used to reverse engineering games.
  
 I do not recommend anyone to implement these techniques and this is strictly for educational purposes.
 ## Technologies/Tools Used
@@ -20,8 +20,8 @@ Before diving into the specifics of reverse engineering in games, it's important
 It's crucial to remember that bypassing protective measures is illegal and some games include terms of service specifying that. Therefore, I will not provide any instructions on how to bypass these protections. This project will focus on the legal and ethical aspects of reverse engineering the games mechanics.
 
 ## Currency
-For games, cheatengine can be a very underrated tool. To use cheatengine effectively, you need to identify a few things first.
-Is the value:
+For games and in general, cheatengine can be a very underrated tool for reverse engineering. To use cheatengine effectively, you need to identify a few things first.
+Is the value a/n:
 - integer
 - float
 - double
@@ -42,15 +42,14 @@ For currency I looked at the instructions being used at each address and used so
 Instructions:
 - cmp: Compares the contents of general-purpose register (GPR) RA with the contents of GPR RB as signed integers and sets one of the bits in Condition Register Field BF
 
-- mov: Copies the data item referred to by it's second operand
-```
+- mov: Copies the data item referred to by it's second operand ```
 
- I thought that seemed logical for a way to check for the value of currency being changed so I checked the address where this was being implemented in IDA
+I thought that seemed logical for a way to check for the value of currency being changed so I checked the address where this was being implemented in IDA
 
 ![image-68](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-68.png
 )
 
-Following the flow of the code we eventualy get here:
+Following the flow of the program we eventualy get here:
 
 ![image-69](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-69.png
 )
@@ -67,7 +66,7 @@ For player health it is a bit different. In my case, the health we are trying to
 
 ![image-71](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-71.png
 )
-Here is the base address circled in blue, you can also find it by double clicking on address result since we want the value of `esi`
+Here is the base address circled in blue. As seen from the last photo the base address is moved from `esi+58` into `ecx` then being compared
 
 ![image-72](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-72.png
 )
@@ -83,6 +82,7 @@ Following that VTable address in IDA,
 
 ![image-74](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-74.png
 )
+
 Then stepping in the offset:
 
 ![image-75](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-75.png
@@ -99,16 +99,16 @@ Now all that's left is to create a DLL that modifies the game's memory at the ad
 
 
 ## Results
-Health: Here the health bar is in the top left, in this clip you can see my character jumping off a building and getting attacked while receiving no damage.
+Health: Here the health bar is in the top left, in this clip you can see my character jumping off a building and getting absolutely destroyed while receiving no damage (increased playback speed because they take forever to attack)
 
 https://drive.google.com/file/d/10U6RN4tlk2JXzOXwdK20ItP_pnWIdd2V/view?resourcekey
 
 
-Money: In this clip you can see my character pickpocketing an NPC and receiving a very large number of funds. (normally for pickpocketing you receive ~20f)
+Currency: In this clip you can see my character pickpocketing an NPC and receiving a very large number of funds. (normally for pickpocketing you receive ~20f)
 
 https://www.youtube.com/watch?v=37kk4Kf21S0
 
 
-### Conclusion
+## Conclusion
 
-In today's online games, there will be additional things we have to consider with anti-cheat engines being tied to games. However not all games have anti-cheat's and some do not always work. But tread with caution as in some cases cheating in video games can be illegal in some circumstances. Also there is a chance of being banned from playing the game. I do not recommend anyone to implement these techniques and this is strictly for educational purposes.
+In today's online games, there will be additional things we have to consider with anti-cheat engines being tied to games. However not all games have anti-cheat's and some do not always work. But tread with caution as cheating in video games can be illegal in certain circumstances. Also there is a chance of being banned from playing the game. I do not recommend anyone to implement these techniques and this is strictly for educational purposes.

@@ -1,4 +1,4 @@
-# Opera Data Collection Analysis Part One: Broswer_assistant
+# Opera Data Collection Analysis Part 1: Broswer_assistant
 
 
 In this series I will be doing an analysis of the Opera browser. You may have heard of opera as it has been promoted by some of the most popular creators on youtube and other streaming platforms. There has been some buzz around it of people saying that the Opera GX platform was "spyware" by tracking your location, and stealing users' data. In this analysis I will first be searching through the modules the Opera browser uses and seeing exactly if/how they get a users location, and uncovering other invasive tasks they perform. I will be initially focusing on if they get a users exact location and then later uncovering what data they collect.
