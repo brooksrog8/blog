@@ -36,7 +36,7 @@ function About() {
         <h1 style={styles.heading}>About</h1>
         <p style={styles.paragraph}>
           My name is Brooks. If you're reading this, you most likely already know that I reverse engineer malware or game-related software.
-          I enjoy breaking down systems at their lowest level, and have been involved in the computer security realm for about 5 years now. I am open to help or be paid to reverse software
+          I enjoy breaking down systems at their lowest level and have dedicated myself to the computer security realm for about 5 years now. I am open to help or be paid to reverse software
           or embedded systems if anyone has an interesting project.
         </p>
         <p style={styles.contactInfo}>

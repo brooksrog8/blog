@@ -15,7 +15,7 @@ IDA Pro
 x32dbg
 
 ## Initial Setup
-Before diving into the specifics of reverse engineering in games, it's important to understand that usually games will be packed. So first you might have to understand and unpack the game's protection mechanism. Using x32dbg can be a good tool for analyzing how these are used.
+Before diving into the specifics of reverse engineering in games, it's important to understand that usually games will be packed. So first you might have to understand and unpack the game's protection mechanism. Using x32dbg can be a good tool for analyzing how these are used in memory.
 
 It's crucial to remember that bypassing protective measures is illegal and some games include terms of service specifying that. Therefore, I will not provide any instructions on how to bypass these protections. This project will focus on the legal and ethical aspects of reverse engineering the games mechanics.
 
