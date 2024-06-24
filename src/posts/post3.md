@@ -28,9 +28,8 @@ In this initial entry, I will be going over browser_assistant.exe
 As previously said, I heard some buzz that this application tracks your exact location. So with that being said I thought a good first step would be to run wireshark and open the browser to see if it makes any sketchy requests to speed up the reversing process.
 
 
-![image-58](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-58.png
+![image-58fixPost3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-58fixPost3.png
 )
-
 
 This is what we see just from opening the browser
 
@@ -122,10 +121,8 @@ It then proceeds to check for various other nations and does some handling for t
 Following the cross references, this is the main function where the geolocation checking starts taking place named `geoProcessAndNotify`
 
 
-![image-33post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-33post3.png
+![replace33post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/replace33post3.png
 )
-
-![alt text](image.png)
 
 There are some other functions inside `geoProcessAndNotify` that do interesting things like checking what times you open up the browser, if you're in incognito mode, what language to have for your preferences, country overrides, however none of the content seems to be too abnormal for a browser.
 
