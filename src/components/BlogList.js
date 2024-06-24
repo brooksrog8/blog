@@ -8,11 +8,11 @@ function BlogList() {
   const [selectedCategory, setSelectedCategory] = useState('');
 
   useEffect(() => {
-    // Fetch your list of posts here, maybe from an API or a local file
-    // For simplicity, I'm hardcoding it here
+
     const fetchedPosts = ([
-      { id: 2, title: 'Overview of PE File Structure for Reverse Engineering', fileName: 'portableEx.md', category: 'Reverse Engineering' },
-      { id: 1, title: 'AAA Company Game Reversing', fileName: 'post1.md', category: 'Reverse Engineering' },
+      { id: 3, title: 'Opera Data Collection Analysis Part One: Broswer_assistant', fileName: 'post3.md', category: 'Reverse Engineering'},
+      { id: 2, title: 'Overview of PE File Structure for Reverse Engineering', fileName: 'post2.md', category: 'Reverse Engineering Education' },
+      { id: 1, title: 'AAA Company Game Reversing', fileName: 'post1.md', category: 'Reverse Engineering' }
     ]);
     setPosts(fetchedPosts);
     // Extract categories from posts
@@ -50,7 +50,7 @@ function BlogList() {
 
         </div>
         <div className="categories-section">
-          <h3 className="categories-title">Labels</h3>
+          <h3 className="categories-title">Categories</h3>
           <ul className="categories-list">
             {categories.map((category, index) => (
               <li key={index} className="category-item">
