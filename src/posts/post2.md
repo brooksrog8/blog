@@ -21,21 +21,21 @@ On a 32 bit operating system, each process is guaranteed 4gb of virtual memory, 
 Here is an example how a file appears on disk
 
 
-![image-15](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-15.png
+![image-15](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-15.png
 )
 
 
 A VA for the PE file header here would be 0x00400108 in memory, 0x00400200 for .text, and so on. 
 
 
-![image-18](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-18.png
+![image-18](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-18.png
 )
 
 Here is what a PE file looks like in a hex editor.
 
 It starts with the "magic" MZ or 0x5A4D, these are the initials of the PE designer Mark Zbikowski.
 This is important to remember because every exe will begin with this sequence, also  the E1fa at 0x40, which is a DWORD offset to a new PE header that includes PE\0\0.
-![image-16](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-16.png
+![image-16](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-16.png
 )
 
 
@@ -108,7 +108,7 @@ int main() {
 Now looking at our IAT in PE-Bear:
 
 
-![image-20](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-20.png
+![image-20](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-20.png
 )
 
 
@@ -117,10 +117,10 @@ As you can see the result is an entry for `user32.dll` being added to the IAT of
 Now in IDA searching for `MessageBox` in our imports:
 
 
-![image-23](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-23.png
+![image-23](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-23.png
 )
 
-![image-22](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-22.png
+![image-22](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-22.png
 )
 
 Then we can find our function here in the `.data` section, where the IAT is typically located.
@@ -158,11 +158,11 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
 
 
 
-![image-24](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-24.png
+![image-24](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-24.png
 )
 
 
-![image-26](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-26.png
+![image-26](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-26.png
 )
 
 ### Significance of IAT/EAT in Reverse Engineering

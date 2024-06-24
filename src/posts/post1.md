@@ -51,45 +51,46 @@ Instructions:
 
 Following the flow of the code we eventualy get here:
 
-![image-69](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-69.png
+![image-69](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-69.png
 )
 
 Where it pushes an offset labeled `aSetPlayerFunds`
 
 Stepping in .rdata we can see the value tied to our player funds:
 
-![image-70](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-70.png
+![image-70](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-70.png
 )
-
 ## Player Health
 
 For player health it is a bit different. In my case, the health we are trying to find the value of is an unknown initial value. So we scan for an unknown initial value in cheatengine. There will likely be multiple results, for each address, I found the base address of the class and opened it in Reclass.
 
-![image-71](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/pics/image-71.png
+![image-71](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-71.png
 )
-
 Here is the base address circled in blue, you can also find it by double clicking on address result since we want the value of `esi`
 
-![image-72](https://raw.githubusercontent.com/brooksrog8/blog/master/src/posts/image-72.png
+![image-72](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-72.png
 )
 
  Then I discovered that at index 4 (5th entry) of every VTable, which is the first pointer in the class, there is a pointer to the NAME of the class.
 
  In reclass:
 
-![alt text](image-73.png)
+![image-73](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-73.png
+)
 
 Following that VTable address in IDA,
 
-![alt text](image-74.png)
-
+![image-74](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-74.png
+)
 Then stepping in the offset:
 
-![alt text](image-75.png)
+![image-75](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-75.png
+)
 
 
 
-![alt text](image-76.png)
+![image-76](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-76.png
+)
 
 And here in .data we can find the value tied to our players health called `aCsrvplayerhealth`.
 

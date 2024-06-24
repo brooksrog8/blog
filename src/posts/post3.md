@@ -20,13 +20,15 @@ In this initial entry, I will be going over browser_assistant.exe
 
 As previously said, I heard some buzz that this application tracks your exact location. So with that being said I thought a good first step would be to run wireshark and open the browser to see if it makes any sketchy requests to speed up the reversing process.
 
-![alt text](image-58.png)
+![image-58](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-58.png
+)
 
 This is what we see just from opening the browser
 
 We see some suspicous requests like autoupdate.geo.opera.com, us-autoupdate.opera.com, weather-2.geo.opera.com, and others.
 
-![alt text](image-59.png)
+![image-59](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-59.png
+)
 
 Clearly by looking at our browser it is getting my location somehow, but is the browser_assistant module the culprit?
 
@@ -34,38 +36,45 @@ Clearly by looking at our browser it is getting my location somehow, but is the 
 First thing I normally do after opening a program in IDA is go to imports and exports, then I decided to search for strings related to geolocation since that is what I was seeing users raving about. Off the bat we see a few, 
 in the imports tab we will see this:
 
-![alt text](image-60.png)
+![image-60](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-60.png
+)
 
 And for the strings:
 
-![alt text](image-61.png)
+![image-61](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-61.png
+)
 
 Lets follow `GetGeoInfoW` first.
 
-![alt text](../../pics/image-60.png)
+![image-60post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-60post3.png
+)
 
-![alt text](../../pics/image-61.png)
-
+![image-61post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-61post3.png
+)
 As we can see here `getGeoInfoW` is a Windows API function to get location information.
 
-![alt text](../../pics/image-62.png)
+![image-62post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-62post3.png
+)
 
 GetUserGeoID is used here and passed with 0x10u (unsigned 16 in hexadecimal)
 
 Looking at the parameters for GetUserGeoID in windows documentation we can see that it is wanting the geographical nation.
 
-![alt text](../../pics/image-63.png)
+![image-63post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-63post3.png
+)
 
 
 Now looking back at UserGeoID, so we can find our UserGeoID value in C:
 
-![alt text](../../pics/image-64.png)
+![image-64post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-64post3.png
+)
 
 As you can see we get the value 244, and looking at the documentation for UserGeoID and going to the table of Geographical locations:
 
-![alt text](image-1.png)
-
-![alt text](image-2.png)
+![image-1post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-1post3.png
+)
+![image-2post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-2post3.png
+)
 
 
 We can see that it will be able to find the users current country, however that's a very large scope of people so not that invasive. Let's see if it uses that information to narrow the search down.
@@ -78,8 +87,8 @@ It then proceeds to check for various other nations and does some handling for t
 
 Following the cross references, this is the main function where the geolocation checking starts taking place named `geoProcessAndNotify`
 
-
-![alt text](image-33.png)
+![image-33post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-33post3.png
+)
 
 There are some other functions inside `geoProcessAndNotify` that do interersting things like checking what times you open up the browser, if you're in incognito mode, what language to have for your preferences, country overrides, however none of the content seems to be too abnormal for a browser. 
 
@@ -87,42 +96,51 @@ I had some difficulties wanting to investigate too many functions because they l
 
 So inside this main `geoProcessAndNotify` function from the last photo, we see a function inside of it I named `geoFromSetup` on line 89
 
-![alt text](image-64.png)
+![image-64post3pt2](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-64post3pt2.png
+)
 
 
 Stepping inside `geoFromSetup` we see:
 
-![alt text](image-35.png)
+![image-35](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-35.png
+)
 
 Here it just sets up a basic array structure getting ready to hold some data then calls `geoAfterbase`
 
-![alt text](image-36.png)
+![image-36](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-36.png
+)
 
 
 Here `geoAfterBase` initializes v4 to -1 and then passes its address to `geobaseCall`
 
-![alt text](image-37.png)
+![image-37](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-37.png
+)
 
 And then here we are back at the first reference from .rdata
 
 So we can see by backtracking the cross references it does for sure have our location, and it's storing it in a structure to hold it.
 
-![alt text](image-62.png)
+![image-62post3pt2](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-62post3pt2.png
+)
 
 So after it returns from the function that retrieves our geo region, it then takes the value and copies it to a string in the subroutine `callingStrCopies` which returns the value along with other data to `&v36`.
 
-![alt text](image-44.png)
+![image-44post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-44post3.png
+)
 
 Some strings are copied at locations in memory after `a1` then returns `a1` which serves as a buffer.
 
-![alt text](image-45.png)
+![image-45post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-45post3.png
+)
 
 
-![alt text](image-46.png)
+![image-46post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-46post3.png
+)
 
 `v36` is then moved into `v14`, and `v45` then called in a function i've named timeStamping passing the value of the data `v45` as an argument:
 
-![alt text](image-53.png)
+![image-53post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-53post3.png
+)
 
 Stepping inside this is what we see:
 
@@ -133,21 +151,23 @@ There are two functions that we will be looking at in here:
 
 First inside `operaLastSeen`
 
-![alt text](image-54.png)
+![image-54post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-54post3.png
+)
 
 Here we can see some interesting functions and some strings telling us what is going on. We see that it is timestamping every first run of the browser. Stepping inside the `operaLastseen` function at the top:
 
-![alt text](image-55.png)
+![image-55post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-55post3.png
+)
 
 We can see here that it includes some more strings telling us that it also tracks the last run of the browser.
 
 
 Then into `creationAndRunTimestamp` which takes a parameter that assigns `v34` to `a3` that gets passed.
- 
-![alt text](image-50.png)
+![image-50post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-50post3.png
+)
 
-![alt text](image-51.png)
-
+![image-51post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-51post3.png
+)
 And thankfully there's some strings to help us see that this function is used for timestamp management and some profile creation operations.
 
 
@@ -156,7 +176,8 @@ So it gets our country using the windows api, our time using GetSystemTimeAsFile
 
 # getaddrinfo
 
-![alt text](image-38.png)
+![image-38post3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-38post3.png
+)
 
 Another method they possibly could have used was getting a users ip using the `getaddrinfo` Windows API and then querying an IP location service, but it was clear they needed to use it for resolving domain names and other common browser functions. Also we saw from running the program in Wireshark that it made no requests to an IP service to get our location. This means that either 
 - Opera has made an update to no longer get the users exact location via IP services and uses a new method
@@ -172,13 +193,14 @@ We know for a fact that it DOES get the users location seen from the screenshots
 Now as shown previously in wireshark, it makes a request to a domain that seemed rather suspicous and we can find it in the browser_assistant module.
 
 
-![alt text](image-40.png)
+![image-40](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-40.png
+)
 
 However by looking at the cross references, this function clearly does nothing. I suspect this is likely used from another module in the program folder, so we will be revisiting this in the future.
 
 
-![alt text](image-41.png)
-
+![image-41](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-41.png
+)
 
 In conclusion, it seeems clear that the `browser_assistant` module does not operate as spyware according to our goal of finding where our coordinates our being tracked. Instead it performs normal IP address retrieving, and identifiying gerneral geo locations on the coiuntry level, and gathering statistics related to browser usage or connectivity. There is some statistic collection of what sites you visit, however I consider that rather normal in my opinion since the data collected is anonymized in this instance. 
 
