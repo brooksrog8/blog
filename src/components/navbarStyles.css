@@ -1,0 +1,36 @@
+navbarStyles.css
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #333; /* Adjust the background color as needed */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Ensures the navbar stays on top */
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  li {
+    margin: 0 20px; /* Adjust the spacing between menu items */
+  }
+  
+  a {
+    text-decoration: none;
+    color: white; /* Adjust the text color as needed */
+    padding: 14px 20px; /* Adjust the padding for the menu items */
+    display: block;
+  }
+  
+  a:hover {
+    background-color: #575757; /* Adjust the hover effect */
+  }
+  

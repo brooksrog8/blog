@@ -23,6 +23,7 @@ body {
 
 /* Styles for the title */
 .blog-list-title {
+    padding-top: 60px;
     font-size: 24px;
     color: #2981df;
     font-family: 'Arial'; /* Change font to Arial or any preferred font */
