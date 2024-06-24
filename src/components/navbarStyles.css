@@ -3,7 +3,7 @@ navbarStyles.css
 nav {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     background-color: #333; /* Adjust the background color as needed */
     position: fixed;
     top: 0;

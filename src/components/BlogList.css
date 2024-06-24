@@ -7,7 +7,6 @@ body {
     width: 100%;
     color: #cfcfcf;
     font: normal 13px/1.8em Arial;
-    text-align: left;
     letter-spacing: 0.06em;
     position: relative;
     min-height: 100vh;
@@ -101,6 +100,8 @@ footer p {
 }
 
 .content-container {
+    margin: 0 auto;
+
     display: flex;
     justify-content: space-between;
 }

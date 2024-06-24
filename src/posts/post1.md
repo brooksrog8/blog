@@ -22,9 +22,13 @@ It's crucial to remember that bypassing protective measures is illegal and some 
 ## Currency
 For games and in general, cheatengine can be a very underrated tool for reverse engineering. To use cheatengine effectively, you need to identify a few things first.
 Is the value a/n:
+
 - integer
+
 - float
+
 - double
+
 - string
 
 Your value could be a different data type, but generally for games these will almost always be the data types you will be looking for. In my case I am looking for an integer of a known value. So I will scan for the value ex: 100.
@@ -40,7 +44,8 @@ For currency I looked at the instructions being used at each address and used so
 
 ```
 Instructions:
-- cmp: Compares the contents of general-purpose register (GPR) RA with the contents of GPR RB as signed integers and sets one of the bits in Condition Register Field BF
+- cmp: Compares the contents of general-purpose register (GPR) RA with the contents 
+of GPR RB as signed integers and sets one of the bits in Condition Register Field BF
 
 - mov: Copies the data item referred to by it's second operand ```
 

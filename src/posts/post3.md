@@ -13,9 +13,13 @@ The reason I decided to start this journey of reversing the Opera browser was du
 
 
 In this series I will go over the modules:
+
 - opera.exe
+
 - opera_browser.dll
+
 - opera_elf.dll
+
 - browser_assistant.exe
 
 
@@ -209,8 +213,9 @@ Stepping inside this is what we see:
 There are two functions that we will be looking at in here:
 
 
-- `operaLastSeen`
-- `creationAndRunTimeStamp`
+- operaLastSeen
+
+- creationAndRunTimeStamp
 
 
 First inside `operaLastSeen`

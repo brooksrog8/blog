@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom'; // Import Link
+import { useParams } from 'react-router-dom'; // Import Link
 import './BlogPost.css';
 import MarkDown from 'markdown-to-jsx';
 
@@ -21,7 +21,6 @@ const BlogPost = () => {
 
   return (
     <div>
-      <Link to="/" className="back-link">Back to Home</Link> 
       <div className="markdown-content">
         <MarkDown>{post}</MarkDown>
 
