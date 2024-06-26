@@ -50,7 +50,7 @@ of GPR RB as signed integers and sets one of the bits in Condition Register Fiel
 - mov: Copies the data item referred to by it's second operand ```
 
 I thought that seemed logical for a way to check for the value of currency being changed so I checked the address where this was being implemented in IDA
-
+```
 ![image-68](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-68.png
 )
 
@@ -106,8 +106,7 @@ Now all that's left is to create a DLL that modifies the game's memory at the ad
 ## Results
 Health: Here the health bar is in the top left, in this clip you can see my character jumping off a building and getting absolutely destroyed while receiving no damage (increased playback speed because they take forever to attack)
 
-https://drive.google.com/file/d/10U6RN4tlk2JXzOXwdK20ItP_pnWIdd2V/view?resourcekey
-
+https://www.youtube.com/watch?v=E89O6nyognM
 
 Currency: In this clip you can see my character pickpocketing an NPC and receiving a very large number of funds. (normally for pickpocketing you receive ~20f)
 

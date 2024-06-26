@@ -1,4 +1,4 @@
-# Opera Data Collection Analysis Part 1: Broswer_assistant
+# Opera Data Collection Technical Analysis Part 1: Broswer_assistant
 
 
 
@@ -41,14 +41,6 @@ This is what we see just from opening the browser
 We see some suspicious requests like autoupdate.geo.opera.com, us-autoupdate.opera.com, weather-2.geo.opera.com, and others.
 
 
-![image-59](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-59.png
-)
-
-
-Clearly by looking at our browser it is getting my location somehow, but is the browser_assistant module the culprit?
-
-
-
 
 First thing I normally do after opening a program in IDA is go to imports and exports, then I decided to search for strings related to geolocation since that is what I was seeing users raving about. Off the bat we see a few,
 in the imports tab we will see this:
@@ -81,7 +73,7 @@ As we can see here `getGeoInfoW` is a Windows API function to get location infor
 )
 
 
-GetUserGeoID is used here and passed with 0x10u (unsigned 16 in hexadecimal)
+GetUserGeoID is used here and passed with 0x10u (unsigned 16 in hex)
 
 
 Looking at the parameters for GetUserGeoID in windows documentation we can see that it is wanting the geographical nation.
