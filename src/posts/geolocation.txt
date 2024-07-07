@@ -1,0 +1,6 @@
+Latitude: "36.0944"
+Longitude: "-95.9717"
+City: Tulsa"
+Region: Oklahoma"
+Country: "United States"
+Timezone: America\/Chicago"
