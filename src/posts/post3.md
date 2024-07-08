@@ -32,19 +32,19 @@ The browser_assistant module is defaulted to run at startup and does not run per
 
 Before blindly searching for strings in IDA, it's a good idea to understand how an application can get a users location. 
 
-However if you don't care and just want to see the results you can move onto the next section.
+However if you don't care and just want to see the results you can move onto the next section (Getting Geo Location).
 
 
-There's multiple ways an engineer could get a users location. For this module it will be a bit harder to narrow down which methods they would be most likely to use, since it defaults to run at startup and upon running the exe alone, in task manager it hooks the main Opera.exe then quits. Also it doesn't run if the Opera.exe is ran directly so we can for sure rule out any HTLM5 Geolocation API methods, at least for this module.
+There's multiple ways an engineer could get a users location. For this module it will be a bit harder to narrow down which methods they would be most likely to use because unlike the main browser exe, it's not ran in a sandboxed environment, so no restrictions for direct access to Windows API's
 
-I won't be going into detail about each method, but what I did was look into an overview and looked at what code, API's, or keywords that were being used to help make my search more efficient.
+For runtime behavior, it starts 2 processes of itself, hooks opera.exe, then quits the 3 instances.
 
-Some of the most popular strategies we can look at for getting this user data could be:
+I won't be going into detail on how the code for each Windows Location API works, but what I did was get an overview of keywords and strategies they were using to help make my search more efficient.
+
+Some possible methods we can look at for getting this user data for this module could be:
 
 - Windows Location API
-- WIFI and IP Geolocation Services
-- Using GPS Hardware Directly
-- Using Sensor APIs
+- Querying external Geolocation API's
 
 Starting with Windows Location API. Using this method, the developer has potential to:
 - Use a geofence: Receive notifications when the user's device has entered or left an area of interest.
@@ -59,7 +59,9 @@ Starting with Windows Location API. Using this method, the developer has potenti
 - Track when the user visits a location: Poll for or receive notifications when the user spends significant time in a location.
 - Help the user change location settings: Link to location privacy settings from your app if the user revokes access to location while your app is in the foreground. Call the - LaunchUriAsync method with the URI "ms-settings://privacy/location"
 
-![alt text](image.png)
+Link to Windows Location API samples:
+https://github.com/Microsoft/Windows-universal-samples/tree/main/Samples/Geolocation
+
 
 
 ### Using Wifi and IP Geolocation Services
@@ -165,19 +167,13 @@ This Is probably the most simple way to execute this, using an external API to r
 
 As previously said, I heard some buzz that this application tracks your exact location. So with that being said I thought a good first step would be to run wireshark and open the main browser module to see if it makes any sketchy requests to speed up the reversing process.
 
+![alt text](image-2.png)
 
-![image-58fixPost3](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-58fixPost3.png
-)
+When we run the app, it quesries a DNS server `desktop-assistant-sub.osp.opera.software`  for both IPv4 and IPv6 addresses. The DNS server responds with the corresponding IP addresses and includes additional information about how the domain resolves through CNAME records. These records also mention submit.geo.opera.com, so we can assume that part of the domain's functionality involves interactions or redirections to a geo-related service.
 
-This is what we see just from opening the browser
+First thing I normally do after opening a program in IDA is go to imports, exports, and strings. After the research done earlier relating to Windows Location API, and external geolocation services, I searched for keywords that would lead to areas of interest.
 
-
-We see some suspicious requests like autoupdate.geo.opera.com, us-autoupdate.opera.com, weather-2.geo.opera.com, and others.
-
-Then upon running the browser_assistant module it hooks the main opera.exe module and ma
-
-First thing I normally do after opening a program in IDA is go to imports and exports, then I decided to search for strings related to geolocation since that is what I was seeing users raving about. Off the bat we see a few,
-in the imports tab we will see this:
+For Exports:
 
 
 ![image-60](https://raw.githubusercontent.com/brooksrog8/blog/master/pics/image-60.png
